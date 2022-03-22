@@ -1,7 +1,23 @@
-import Button from "./Button";
-import Dice from "./Dice";
+import Die from "./Die";
+import React from "react";
 
 function App() {
+  const [dice, setDice] = React.useState(allNewDice());
+
+  function allNewDice() {
+    const newDice = [];
+    for (let i = 0; i < 10; i++) {
+      newDice.push(Math.floor(Math.random() * 6 + 1));
+    }
+    return newDice;
+  }
+
+  const diceElements = dice.map(die => <Die value={die} />);
+
+  function rollDice() {
+    setDice(allNewDice());
+  }
+
   return (
     <main className="main">
       <div>
@@ -11,8 +27,12 @@ function App() {
           current value between rolls.
         </p>
       </div>
-      <Dice />
-      <Button />
+      <div className="dice--container">{diceElements}</div>
+      <div>
+        <button onClick={rollDice} className="roll--button">
+          Roll
+        </button>
+      </div>
     </main>
   );
 }
