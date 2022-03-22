@@ -17,10 +17,10 @@ html {
 main {
   background-color: #f5f5f5;
   text-align: center;
-  width: 320px;
-  height: 320px;
-  border-radius: 6.4px;
-  padding: 35px;
+  width: 640px;
+  height: 640px;
+  border-radius: 13px;
+  padding: 70px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -29,28 +29,48 @@ main {
 h1 {
   color: #2b283a;
   font-weight: 700;
-  font-size: 26px;
+  font-size: 52px;
 }
 
 p {
-  margin-top: 5px;
+  margin-top: 10px;
   color: #4a4e74;
   font-family: "Inter", sans-serif;
-  font-size: 13px;
+  font-size: 26px;
 }
 
 .roll--button {
   background-color: #5035ff;
   color: #ffffff;
-  border-radius: 4px;
+  border-radius: 8px;
   border: none;
-  font-size: 16px;
-  padding: 10px;
-  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.18);
+  font-size: 32px;
+  padding: 20px 60px;
+  box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.36);
   cursor: pointer;
+  font-family: "Karla", sans-serif;
 }
 
 .roll--button:active {
-  box-shadow: inset 0px 3px 8px rgba(0, 0, 0, 0.18);
+  box-shadow: inset 0px 6px 16px rgba(0, 0, 0, 0.36);
   box-shadow: none;
+}
+
+.dice--container {
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 20px;
+}
+
+.dice {
+  width: 70px;
+  height: 70px;
+  background-color: #ffffff;
+  font-family: "Karla", sans-serif;
+  font-size: 40px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
 }
