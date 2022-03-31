@@ -1,18 +1,27 @@
-import Die from "./Die";
-import React from "react";
+import Die from './Die';
+import React from 'react';
+import { nanoid } from 'nanoid';
 
 function App() {
   const [dice, setDice] = React.useState(allNewDice());
 
   function allNewDice() {
-    const newDice = [];
+    let newDice = [];
     for (let i = 0; i < 10; i++) {
-      newDice.push(Math.floor(Math.random() * 6 + 1));
+      newDice.push({
+        value: Math.floor(Math.random() * 6 + 1),
+        isHeld: false,
+        // we generate a unique id using nanoid, so that we no longer have this pesky warning of "each child in a list should have a unique 'key' prop". Now they do and everybody is happy
+        id: nanoid(),
+      });
     }
+    console.log(newDice);
     return newDice;
   }
 
-  const diceElements = dice.map(die => <Die value={die} />);
+  const diceElements = dice.map((die) => (
+    <Die key={die.id} value={die.value} />
+  ));
 
   function rollDice() {
     setDice(allNewDice());
