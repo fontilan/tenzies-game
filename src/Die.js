@@ -5,7 +5,7 @@ function Die(props) {
   };
 
   return (
-    <button style={styles} className="dice">
+    <button style={styles} className="dice" onClick={props.holdDice}>
       {props.value}
     </button>
   );
