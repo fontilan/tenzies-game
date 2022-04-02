@@ -1,19 +1,23 @@
-import Die from './Die';
 import React from 'react';
+import Die from './Die';
 import { nanoid } from 'nanoid';
 
 function App() {
   const [dice, setDice] = React.useState(allNewDice());
 
+  function generateDice() {
+    return {
+      value: Math.floor(Math.random() * 6 + 1),
+      isHeld: false,
+      // we generate a unique id using nanoid, so that we no longer have this pesky warning of "each child in a list should have a unique 'key' prop". Now they do and everybody is happy
+      id: nanoid(),
+    };
+  }
+
   function allNewDice() {
     let newDice = [];
     for (let i = 0; i < 10; i++) {
-      newDice.push({
-        value: Math.floor(Math.random() * 6 + 1),
-        isHeld: false,
-        // we generate a unique id using nanoid, so that we no longer have this pesky warning of "each child in a list should have a unique 'key' prop". Now they do and everybody is happy
-        id: nanoid(),
-      });
+      newDice.push(generateDice());
     }
     return newDice;
   }
@@ -21,13 +25,7 @@ function App() {
   function rollDice() {
     setDice((oldDice) =>
       oldDice.map((die) => {
-        return die.isHeld
-          ? die
-          : {
-              value: Math.floor(Math.random() * 6 + 1),
-              isHeld: false,
-              id: nanoid(),
-            };
+        return die.isHeld ? die : generateDice();
       })
     );
   }
