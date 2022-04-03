@@ -1,15 +1,26 @@
 import React from 'react';
 import Die from './Die';
 import { nanoid } from 'nanoid';
+import Confetti from 'react-confetti';
 
 function App() {
   const [dice, setDice] = React.useState(allNewDice());
+
+  const [tenzies, setTenzies] = React.useState(false);
+
+  React.useEffect(() => {
+    const allDiceHeld = dice.every((die) => die.isHeld);
+    const firstDieValue = dice[0].value;
+    const allDiceSameValue = dice.every((die) => die.value === firstDieValue);
+    if (allDiceHeld && allDiceSameValue) {
+      setTenzies(true);
+    }
+  }, [dice]);
 
   function generateDice() {
     return {
       value: Math.floor(Math.random() * 6 + 1),
       isHeld: false,
-      // we generate a unique id using nanoid, so that we no longer have this pesky warning of "each child in a list should have a unique 'key' prop". Now they do and everybody is happy
       id: nanoid(),
     };
   }
@@ -23,11 +34,16 @@ function App() {
   }
 
   function rollDice() {
-    setDice((oldDice) =>
-      oldDice.map((die) => {
-        return die.isHeld ? die : generateDice();
-      })
-    );
+    if (!tenzies) {
+      setDice((oldDice) =>
+        oldDice.map((die) => {
+          return die.isHeld ? die : generateDice();
+        })
+      );
+    } else {
+      setTenzies(false);
+      setDice(allNewDice());
+    }
   }
 
   function holdDice(id) {
@@ -49,6 +65,7 @@ function App() {
 
   return (
     <main className="main">
+      {tenzies && <Confetti />}
       <div>
         <h1>Tenzies</h1>
         <p>
@@ -59,7 +76,7 @@ function App() {
       <div className="dice--container">{diceElements}</div>
       <div>
         <button onClick={rollDice} className="roll--button">
-          Roll
+          {tenzies ? 'New Game' : 'Roll'}
         </button>
       </div>
     </main>
