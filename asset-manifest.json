@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/tenzies-game/static/css/main.1c90ccc6.css",
+    "main.js": "/tenzies-game/static/js/main.00a97d84.js",
+    "index.html": "/tenzies-game/index.html",
+    "main.1c90ccc6.css.map": "/tenzies-game/static/css/main.1c90ccc6.css.map",
+    "main.00a97d84.js.map": "/tenzies-game/static/js/main.00a97d84.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1c90ccc6.css",
+    "static/js/main.00a97d84.js"
+  ]
+}
