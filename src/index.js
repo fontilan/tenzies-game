@@ -12,3 +12,4 @@ root.render(<App />);
 // 2. track the number of rolls
 // 3. track the time it took to win
 // 4. save best time to localStorage
+// 5. make it responsive
