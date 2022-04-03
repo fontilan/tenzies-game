@@ -1,4 +1,4 @@
-/* TODO: import Inter font directly from the dev's site */
+@import url('https://rsms.me/inter/inter.css');
 
 * {
   box-sizing: border-box;
