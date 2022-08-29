@@ -1,14 +1,14 @@
-import React from 'react';
-import Die from './Die';
-import { nanoid } from 'nanoid';
+import React, { useEffect, useState } from 'react';
 import Confetti from 'react-confetti';
+import { nanoid } from 'nanoid';
+
+import Die from './Die';
 
 function App() {
-  const [dice, setDice] = React.useState(allNewDice());
+  const [dice, setDice] = useState(allNewDice());
+  const [tenzies, setTenzies] = useState(false);
 
-  const [tenzies, setTenzies] = React.useState(false);
-
-  React.useEffect(() => {
+  useEffect(() => {
     const allDiceHeld = dice.every((die) => die.isHeld);
     const firstDieValue = dice[0].value;
     const allDiceSameValue = dice.every((die) => die.value === firstDieValue);
@@ -38,7 +38,7 @@ function App() {
       setDice((oldDice) =>
         oldDice.map((die) => {
           return die.isHeld ? die : generateDice();
-        })
+        }),
       );
     } else {
       setTenzies(false);
@@ -50,16 +50,16 @@ function App() {
     setDice((oldDice) =>
       oldDice.map((die) => {
         return die.id === id ? { ...die, isHeld: !die.isHeld } : die;
-      })
+      }),
     );
   }
 
   const diceElements = dice.map((die) => (
     <Die
+      holdDice={() => holdDice(die.id)}
+      isHeld={die.isHeld}
       key={die.id}
       value={die.value}
-      isHeld={die.isHeld}
-      holdDice={() => holdDice(die.id)}
     />
   ));
 
@@ -67,10 +67,11 @@ function App() {
     <main className="main">
       {tenzies && <Confetti />}
       <div>
-        <h1>Tenzies</h1>
+        <h1>{tenzies ? '🎉 You win! 🎉' : 'Tenzies'}</h1>
         <p>
-          Roll until all dice are the same. Click each die to freeze it at its
-          current value between rolls.
+          {tenzies
+            ? '🥳 Congratulations! 🥳'
+            : 'Roll until all dice are the same. Click each die to freeze it at its current value between rolls.'}
         </p>
       </div>
       <div className="dice--container">{diceElements}</div>
