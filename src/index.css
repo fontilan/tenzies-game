@@ -21,11 +21,11 @@ main {
   border-radius: 0.75em;
   display: flex;
   flex-direction: column;
-  height: 640px;
+  min-height: 700px;
   justify-content: space-between;
   padding: 4em;
   text-align: center;
-  width: 640px;
+  max-width: 700px;
 }
 
 h1 {
@@ -79,4 +79,17 @@ svg {
   font-size: 2.5rem;
   height: 1.75em;
   width: 1.75em;
+}
+
+@media screen and (max-width: 700px) {
+  .main {
+    border-radius: 0;
+    padding: 2em;
+  }
+  .dice-container {
+    grid-template-columns: auto auto;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    justify-content: space-evenly;
+    padding: 3em 0;
+  }
 }
