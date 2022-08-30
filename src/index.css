@@ -1,11 +1,13 @@
 @import url('https://rsms.me/inter/inter.css');
 
+/* reset */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+/* main elements */
 html {
   background-color: #2b1141;
   display: grid;
@@ -40,7 +42,12 @@ p {
   margin-top: 1em;
 }
 
-.roll--button {
+svg {
+  border-radius: 0.25em;
+}
+
+/* button */
+.roll-button {
   background-color: #962bb9;
   border-radius: 0.25em;
   border: none;
@@ -51,13 +58,13 @@ p {
   font-size: 1.75rem;
   padding: 0.75em 2em;
 }
-
-.roll--button:active {
+.roll-button:active {
   box-shadow: inset 0px 6px 16px rgba(0, 0, 0, 0.36);
   box-shadow: none;
 }
 
-.dice--container {
+/* dice container and dice */
+.dice-container {
   display: grid;
   gap: 1.25em;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -72,8 +79,4 @@ p {
   font-size: 2.5rem;
   height: 1.75em;
   width: 1.75em;
-}
-
-svg {
-  border-radius: 0.25em;
 }
