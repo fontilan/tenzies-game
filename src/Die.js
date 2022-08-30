@@ -1,10 +1,5 @@
 function Die({ isHeld, value, holdDice }) {
-  const styles = {
-    boxShadow: isHeld
-      ? '0px 2px 4px rgba(0, 0, 0, 0.3)'
-      : '0px 4px 4px rgba(0, 0, 0, 0.3)',
-  };
-
+  // each die is specified as a separate svg that has a fill property based on the isHeld prop, so that it turns green when it is held by the player
   let one = (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
       <path d="M0 0h512v512H0z" fill="#000" fill-opacity="1"></path>
@@ -83,8 +78,8 @@ function Die({ isHeld, value, holdDice }) {
     </svg>
   );
 
+  // assign the proper svg based on the value
   let diceImage = '';
-
   switch (value) {
     case 1:
       diceImage = one;
@@ -105,10 +100,16 @@ function Die({ isHeld, value, holdDice }) {
       diceImage = six;
   }
 
+  // reduce the box shadow of the held dice
+  const styles = {
+    boxShadow: isHeld
+      ? '0px 2px 3px rgba(0, 0, 0, 0.2)'
+      : '0px 4px 4px rgba(0, 0, 0, 0.3)',
+  };
+
   return (
     <button style={styles} className="dice" onClick={holdDice}>
       {diceImage}
-      {/* <img src={diceImage} alt={value} /> */}
     </button>
   );
 }
