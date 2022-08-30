@@ -5,10 +5,14 @@ import '../src/index.css';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
-root.render(<App />);
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+);
 
 // TODO (FEATURES TO ADD)
-// 1. add real dots instead of numbers on the dice
+// 1. add real dots instead of numbers on the dice - done :-)
 // 2. track the number of rolls
 // 3. track the time it took to win
 // 4. save best time to localStorage
