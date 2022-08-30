@@ -81,9 +81,9 @@ function App() {
             : 'Roll until all dice are the same. Click each die to freeze it at its current value between rolls.'}
         </p>
       </div>
-      <div className="dice--container">{diceElements}</div>
+      <div className="dice-container">{diceElements}</div>
       <div>
-        <button onClick={rollDice} className="roll--button">
+        <button onClick={rollDice} className="roll-button">
           {tenzies ? 'New Game' : 'Roll'}
         </button>
       </div>
