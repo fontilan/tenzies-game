@@ -8,6 +8,7 @@ function App() {
   const [dice, setDice] = useState(allNewDice());
   const [tenzies, setTenzies] = useState(false);
 
+  // end game (tenzies) check. The game ends when all dice are held and all of them are the same value. This check happens every time the dice object changes
   useEffect(() => {
     const allDiceHeld = dice.every((die) => die.isHeld);
     const firstDieValue = dice[0].value;
@@ -17,14 +18,16 @@ function App() {
     }
   }, [dice]);
 
+  // generate the die
   function generateDice() {
     return {
-      value: Math.floor(Math.random() * 6 + 1),
-      isHeld: false,
       id: nanoid(),
+      isHeld: false,
+      value: Math.floor(Math.random() * 6 + 1),
     };
   }
 
+  // generate 10 new dice
   function allNewDice() {
     let newDice = [];
     for (let i = 0; i < 10; i++) {
@@ -33,6 +36,7 @@ function App() {
     return newDice;
   }
 
+  // roll the dice - if the game is not yet finished (tenzies is false) then generate new dice, except the ones that are held. If tenzies is true start a new game by generating 10 new random dice
   function rollDice() {
     if (!tenzies) {
       setDice((oldDice) =>
@@ -46,6 +50,7 @@ function App() {
     }
   }
 
+  // hold the dice - map through the current dice array (oldDice), find the one to hold by the id that is passed when triggering this funcion, set its isHeld prop accordingly, from true to false and vice versa
   function holdDice(id) {
     setDice((oldDice) =>
       oldDice.map((die) => {
@@ -54,6 +59,7 @@ function App() {
     );
   }
 
+  // assign each object from the dice array (each die) to a Die component
   const diceElements = dice.map((die) => (
     <Die
       holdDice={() => holdDice(die.id)}
@@ -63,6 +69,7 @@ function App() {
     />
   ));
 
+  // a few checks happen here. The confetti is thrown when the user wins the game, the title and description changes, and the button changes its text - all based on whether or not the game is finished (tenzies is true)
   return (
     <main className="main">
       {tenzies && <Confetti />}
