@@ -12,8 +12,8 @@ root.render(
 );
 
 // TODO (FEATURES TO ADD)
-// 1. add real dots instead of numbers on the dice - done :-)
-// 2. track the number of rolls
-// 3. track the time it took to win
-// 4. save best time to localStorage
-// 5. make it responsive
+// ✔ add real dots instead of numbers on the dice
+// ✔ make it responsive
+// ✖ track the number of rolls
+// ✖ track the time it took to win
+// ✖ save best time to localStorage
