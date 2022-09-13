@@ -9,7 +9,7 @@
 
 /* global elements */
 html {
-  background-color: #2b1141;
+  background-color: #fbdbc6;
   display: grid;
   font-family: 'Karla', sans-serif;
   height: 100%;
@@ -44,14 +44,15 @@ svg {
 
 /* button */
 .roll-button {
-  background-color: #962bb9;
+  background-color: #f8bd96;
   border-radius: 0.25em;
   border: none;
   box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.36);
-  color: #ffffff;
+  color: #2b283a;
   cursor: pointer;
   font-family: 'Karla', sans-serif;
   font-size: clamp(1rem, 5vw, 1.75rem);
+  letter-spacing: -0.05em;
   margin-top: 2em;
   padding: 0.75em 2em;
 }
@@ -79,7 +80,7 @@ svg {
   width: clamp(1.75em, 10vw, 2em);
 }
 
-/* mobile layout - dice stacked in two vertical rows of 5 dice, main element takes the whole page*/
+/* mobile layout - dice stacked in two vertical rows of 5 dice, main element takes the whole page */
 @media screen and (max-width: 750px) {
   html {
     display: block;
