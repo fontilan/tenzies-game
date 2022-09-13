@@ -11,10 +11,11 @@ function App() {
   const [startTimer, setStartTimer] = useState();
   const [gameTime, setGameTime] = useState(0);
 
+  // start the timer after the page loads and then when tenzies change - on the start of new game
   useEffect(() => {
     const startingTime = new Date();
     setStartTimer(startingTime);
-  }, []);
+  }, [tenzies]);
 
   // calculate the time difference between the start of the game (right after the page loads/after starting new game) and the end of the game (when tenzies === true)
   function endTimer() {
