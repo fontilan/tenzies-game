@@ -65,6 +65,7 @@ function App() {
     } else {
       setTenzies(false);
       setDice(allNewDice());
+      setNumOfRolls(1);
     }
   }
 
