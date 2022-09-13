@@ -7,6 +7,7 @@ import Die from './Die';
 function App() {
   const [dice, setDice] = useState(allNewDice());
   const [tenzies, setTenzies] = useState(false);
+  const [numOfRolls, setNumOfRolls] = useState(1);
 
   // end game (tenzies) check. The game ends when all dice are held and all of them are the same value. This check happens every time the dice object changes
   useEffect(() => {
@@ -36,7 +37,8 @@ function App() {
     return newDice;
   }
 
-  // roll the dice - if the game is not yet finished (tenzies is false) then generate new dice, except the ones that are held. If tenzies is true start a new game by generating 10 new random dice
+  // roll the dice - if the game is not yet finished (tenzies is false) then generate new dice, except the ones that are held + increase the number of rolls.
+  // If tenzies is true start a new game by generating 10 new random dice
   function rollDice() {
     if (!tenzies) {
       setDice((oldDice) =>
@@ -44,6 +46,7 @@ function App() {
           return die.isHeld ? die : generateDice();
         }),
       );
+      setNumOfRolls((prevNum) => prevNum + 1);
     } else {
       setTenzies(false);
       setDice(allNewDice());
@@ -75,11 +78,19 @@ function App() {
       {tenzies && <Confetti />}
       <div>
         <h1>{tenzies ? '🎉 You win! 🎉' : 'Tenzies'}</h1>
-        <p>
-          {tenzies
-            ? '🥳 Congratulations! 🥳'
-            : 'Roll until all dice are the same. Click each die to freeze it at its current value between rolls.'}
-        </p>
+        <div>
+          {tenzies ? (
+            <div>
+              <p>🥳 Congratulations! 🥳</p>
+              <p>It took you {numOfRolls} rolls to win</p>
+            </div>
+          ) : (
+            <p>
+              Roll until all dice are the same. Click each die to freeze it at
+              its current value between rolls.
+            </p>
+          )}
+        </div>
       </div>
       <div className="dice-container">{diceElements}</div>
       <div>
