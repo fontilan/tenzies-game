@@ -8,6 +8,20 @@ function App() {
   const [dice, setDice] = useState(allNewDice());
   const [tenzies, setTenzies] = useState(false);
   const [numOfRolls, setNumOfRolls] = useState(1);
+  const [startTimer, setStartTimer] = useState();
+  const [gameTime, setGameTime] = useState(0);
+
+  useEffect(() => {
+    const startingTime = new Date();
+    setStartTimer(startingTime);
+  }, []);
+
+  // calculate the time difference between the start of the game (right after the page loads/after starting new game) and the end of the game (when tenzies === true)
+  function endTimer() {
+    let endTimer = new Date();
+    let timeDifference = endTimer.getTime() - startTimer.getTime();
+    setGameTime(Math.floor(timeDifference / 1000));
+  }
 
   // end game (tenzies) check. The game ends when all dice are held and all of them are the same value. This check happens every time the dice object changes
   useEffect(() => {
@@ -16,6 +30,7 @@ function App() {
     const allDiceSameValue = dice.every((die) => die.value === firstDieValue);
     if (allDiceHeld && allDiceSameValue) {
       setTenzies(true);
+      endTimer();
     }
   }, [dice]);
 
@@ -82,7 +97,9 @@ function App() {
           {tenzies ? (
             <div>
               <p>🥳 Congratulations! 🥳</p>
-              <p>It took you {numOfRolls} rolls to win</p>
+              <p>
+                It took you {gameTime} seconds and {numOfRolls} rolls to win
+              </p>
             </div>
           ) : (
             <p>
