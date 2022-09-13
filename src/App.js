@@ -6,10 +6,10 @@ import Die from './Die';
 
 function App() {
   const [dice, setDice] = useState(allNewDice());
-  const [tenzies, setTenzies] = useState(false);
+  const [gameTime, setGameTime] = useState(0);
   const [numOfRolls, setNumOfRolls] = useState(1);
   const [startTimer, setStartTimer] = useState();
-  const [gameTime, setGameTime] = useState(0);
+  const [tenzies, setTenzies] = useState(false);
 
   // start the timer after the page loads and then when tenzies change - on the start of new game
   useEffect(() => {
