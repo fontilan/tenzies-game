@@ -15,5 +15,5 @@ root.render(
 // ✔ add real dots instead of numbers on the dice
 // ✔ make it responsive
 // ✔ track the number of rolls
-// ✖ track the time it took to win
+// ✔ track the time it took to win
 // ✖ save best time to localStorage
