@@ -5,8 +5,9 @@ import { nanoid } from 'nanoid';
 import Die from './Die';
 
 function App() {
+  const [bestTime, setBestTime] = useState();
   const [dice, setDice] = useState(allNewDice());
-  const [gameTime, setGameTime] = useState(0);
+  const [gameTime, setGameTime] = useState();
   const [numOfRolls, setNumOfRolls] = useState(1);
   const [startTimer, setStartTimer] = useState();
   const [tenzies, setTenzies] = useState(false);
@@ -24,6 +25,14 @@ function App() {
     setGameTime(Math.floor(timeDifference / 1000));
   }
 
+  // every time the gameTime value is changed (which happens when the game ends) check if the current gameTime value is smaller than the bestTime, and if yes then set the bestTime to be equal to that.
+  // the first check makes sure that an initial value is assigned to bestTime (that initial value is the time of the first game)
+  useEffect(() => {
+    if (bestTime === undefined || bestTime > gameTime) {
+      setBestTime(gameTime);
+    }
+  }, [gameTime]);
+
   // end game (tenzies) check. The game ends when all dice are held and all of them are the same value. This check happens every time the dice object changes
   useEffect(() => {
     const allDiceHeld = dice.every((die) => die.isHeld);
@@ -40,7 +49,8 @@ function App() {
     return {
       id: nanoid(),
       isHeld: false,
-      value: Math.floor(Math.random() * 6 + 1),
+      // update the line below to Math.random() * 6 + 1 after implementing whatever needs to be implemented
+      value: Math.floor(Math.random() * 3 + 1),
     };
   }
 
@@ -54,7 +64,7 @@ function App() {
   }
 
   // roll the dice - if the game is not yet finished (tenzies is false) then generate new dice, except the ones that are held + increase the number of rolls.
-  // If tenzies is true start a new game by generating 10 new random dice
+  // if tenzies is true start a new game by generating 10 new random dice
   function rollDice() {
     if (!tenzies) {
       setDice((oldDice) =>
@@ -95,6 +105,8 @@ function App() {
       {tenzies && <Confetti />}
       <div>
         <h1>{tenzies ? '🎉 You win! 🎉' : 'Tenzies'}</h1>
+        {/* remove line below after best time functionality is implemented properly */}
+        <p>bestTime value is {bestTime}</p>
         <div>
           {tenzies ? (
             <div>
