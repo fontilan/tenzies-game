@@ -1,5 +1,5 @@
 function Die({ isHeld, value, holdDice }) {
-  // each die is specified as a separate svg that has a fill property based on the isHeld prop, so that it turns green when it is held by the player
+  // each die is specified as a separate svg that has a fill property based on the isHeld prop, so that it turns green (or yellow, or red etc), when it is held by the player
   // each die has a unique hex code in the isHeld check - each dice has a unique color when held
 
   let one = (
