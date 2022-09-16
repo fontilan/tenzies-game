@@ -51,6 +51,7 @@ function App() {
     return newDice;
   }
 
+  // on starting new game set tenzies to false, roll new dice, reset the roll counter to 1 and start the timer
   function startNewGame() {
     setTenzies(false);
     setDice(allNewDice());
@@ -58,6 +59,9 @@ function App() {
     setStartTimer(new Date());
   }
 
+  // on ending the game set tenzies to false, end the timer and get the time difference, set that as the game time.
+  // then compare the current game time with the previous best time and if it is lower, set it as the new best time.
+  // on first game - when there is no previous best time yet - set the best time to be equal to the very first game time
   function endGame() {
     setTenzies(true);
     let endTimer = new Date();
