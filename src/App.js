@@ -5,6 +5,9 @@ import { nanoid } from 'nanoid';
 import Die from './Die';
 
 function App() {
+  /*
+    ---------- STATES & VARIABLES ----------
+  */
   const [bestTime, setBestTime] = useState();
   const [dice, setDice] = useState(allNewDice());
   const [gameTime, setGameTime] = useState();
@@ -16,6 +19,9 @@ function App() {
   const bestTimeInSeconds = (bestTime / 1000).toFixed(2);
   const gameTimeInSeconds = (gameTime / 1000).toFixed(2);
 
+  /*
+    ---------- SCORE KEEPING ----------
+  */
   // start the timer after the page loads and then when tenzies change - on the start of new game
   useEffect(() => {
     const startingTime = new Date();
@@ -37,6 +43,9 @@ function App() {
     }
   }, [gameTime]);
 
+  /*
+    ---------- BASIC FUNCTIONALITY ----------
+  */
   // end game (tenzies) check. The game ends when all dice are held and all of them are the same value. This check happens every time the dice object changes
   useEffect(() => {
     const allDiceHeld = dice.every((die) => die.isHeld);
@@ -103,6 +112,9 @@ function App() {
     />
   ));
 
+  /*
+    ---------- MAIN RETURN ----------
+  */
   // a few checks happen here. The confetti is thrown when the user wins the game, the title and description changes, and the button changes its text - all based on whether or not the game is finished (tenzies is true)
   return (
     <main className="main">
