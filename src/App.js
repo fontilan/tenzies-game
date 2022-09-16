@@ -107,21 +107,19 @@ function App() {
         <h1>{tenzies ? '🎉 You win! 🎉' : 'Tenzies'}</h1>
         {/* remove line below after best time functionality is implemented properly */}
         <p>bestTime value is {bestTime}</p>
-        <div>
-          {tenzies ? (
-            <div>
-              <p>🥳 Congratulations! 🥳</p>
-              <p>
-                It took you {gameTime} seconds and {numOfRolls} rolls to win
-              </p>
-            </div>
-          ) : (
+        {tenzies ? (
+          <div>
+            <p>🥳 Congratulations! 🥳</p>
             <p>
-              Roll until all dice are the same. Click each die to freeze it at
-              its current value between rolls.
+              It took you {gameTime} seconds and {numOfRolls} rolls to win
             </p>
-          )}
-        </div>
+          </div>
+        ) : (
+          <p>
+            Roll until all dice are the same. Click each die to freeze it at its
+            current value between rolls.
+          </p>
+        )}
       </div>
       <div className="dice-container">{diceElements}</div>
       <div>
