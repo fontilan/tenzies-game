@@ -12,36 +12,12 @@ function App() {
   const [dice, setDice] = useState(allNewDice());
   const [gameTime, setGameTime] = useState();
   const [numOfRolls, setNumOfRolls] = useState(1);
-  const [startTimer, setStartTimer] = useState();
+  const [startTimer, setStartTimer] = useState(new Date());
   const [tenzies, setTenzies] = useState(false);
 
   // values converted into seconds and rounded off to a given precision - currently 2 digits after the decimal point
   const bestTimeInSeconds = (bestTime / 1000).toFixed(2);
   const gameTimeInSeconds = (gameTime / 1000).toFixed(2);
-
-  /*
-    ---------- SCORE KEEPING ----------
-  */
-  // start the timer after the page loads and then when tenzies change - on the start of new game
-  useEffect(() => {
-    const startingTime = new Date();
-    setStartTimer(startingTime);
-  }, [tenzies]);
-
-  // calculate the time difference between the start of the game (right after the page loads/after starting new game) and the end of the game (when tenzies === true)
-  function endTimer() {
-    let endTimer = new Date();
-    let timeDifference = endTimer.getTime() - startTimer.getTime();
-    setGameTime(timeDifference);
-  }
-
-  // every time the gameTime value is changed (which happens when the game ends) check if the current gameTime value is smaller than the bestTime, and if yes then set the bestTime to be equal to that.
-  // the first check makes sure that an initial value is assigned to bestTime (that initial value is the time of the first game)
-  useEffect(() => {
-    if (bestTime === undefined || bestTime > gameTime) {
-      setBestTime(gameTime);
-    }
-  }, [gameTime]);
 
   /*
     ---------- BASIC FUNCTIONALITY ----------
@@ -52,8 +28,7 @@ function App() {
     const firstDieValue = dice[0].value;
     const allDiceSameValue = dice.every((die) => die.value === firstDieValue);
     if (allDiceHeld && allDiceSameValue) {
-      setTenzies(true);
-      endTimer();
+      endGame();
     }
   }, [dice]);
 
@@ -76,6 +51,23 @@ function App() {
     return newDice;
   }
 
+  function startNewGame() {
+    setTenzies(false);
+    setDice(allNewDice());
+    setNumOfRolls(1);
+    setStartTimer(new Date());
+  }
+
+  function endGame() {
+    setTenzies(true);
+    let endTimer = new Date();
+    let timeDifference = endTimer.getTime() - startTimer.getTime();
+    setGameTime(timeDifference);
+    if (bestTime === undefined || bestTime > timeDifference) {
+      setBestTime(timeDifference);
+    }
+  }
+
   // roll the dice - if the game is not yet finished (tenzies is false) then generate new dice, except the ones that are held + increase the number of rolls.
   // if tenzies is true start a new game by generating 10 new random dice
   function rollDice() {
@@ -87,9 +79,7 @@ function App() {
       );
       setNumOfRolls((prevNum) => prevNum + 1);
     } else {
-      setTenzies(false);
-      setDice(allNewDice());
-      setNumOfRolls(1);
+      startNewGame();
     }
   }
 
