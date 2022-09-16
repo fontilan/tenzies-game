@@ -111,14 +111,16 @@ function App() {
     );
   }
 
-  // const
+  function Header() {
+    return <h1>{tenzies ? '🎉 You win! 🎉' : 'Tenzies'}</h1>;
+  }
 
   // a few checks happen here. The confetti is thrown when the user wins the game, the title and description changes, and the button changes its text - all based on whether or not the game is finished (tenzies is true)
   return (
     <main className="main">
       {tenzies && <Confetti />}
       <div>
-        <h1>{tenzies ? '🎉 You win! 🎉' : 'Tenzies'}</h1>
+        <Header />
         {/* remove line below after best time functionality is implemented properly */}
         <p>bestTime value is {bestTimeInSeconds}</p>
         <p>bestRoll value is {bestRoll}</p>
