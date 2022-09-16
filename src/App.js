@@ -5,9 +5,7 @@ import { nanoid } from 'nanoid';
 import Die from './Die';
 
 function App() {
-  /*
-    ---------- STATES & VARIABLES ----------
-  */
+  const [bestRoll, setBestRoll] = useState();
   const [bestTime, setBestTime] = useState();
   const [dice, setDice] = useState(allNewDice());
   const [gameTime, setGameTime] = useState();
@@ -19,9 +17,6 @@ function App() {
   const bestTimeInSeconds = (bestTime / 1000).toFixed(2);
   const gameTimeInSeconds = (gameTime / 1000).toFixed(2);
 
-  /*
-    ---------- BASIC FUNCTIONALITY ----------
-  */
   // end game (tenzies) check. The game ends when all dice are held and all of them are the same value. This check happens every time the dice object changes
   useEffect(() => {
     const allDiceHeld = dice.every((die) => die.isHeld);
@@ -62,6 +57,7 @@ function App() {
   // on ending the game set tenzies to false, end the timer and get the time difference, set that as the game time.
   // then compare the current game time with the previous best time and if it is lower, set it as the new best time.
   // on first game - when there is no previous best time yet - set the best time to be equal to the very first game time
+  // do the same with the number of rolls
   function endGame() {
     setTenzies(true);
     let endTimer = new Date();
@@ -69,6 +65,9 @@ function App() {
     setGameTime(timeDifference);
     if (bestTime === undefined || bestTime > timeDifference) {
       setBestTime(timeDifference);
+    }
+    if (bestRoll === undefined || bestRoll > numOfRolls) {
+      setBestRoll(numOfRolls);
     }
   }
 
@@ -97,18 +96,21 @@ function App() {
   }
 
   // assign each object from the dice array (each die) to a Die component
-  const diceElements = dice.map((die) => (
-    <Die
-      holdDice={() => holdDice(die.id)}
-      isHeld={die.isHeld}
-      key={die.id}
-      value={die.value}
-    />
-  ));
+  const DiceContainer = () => {
+    return (
+      <div className="dice-container">
+        {dice.map((die) => (
+          <Die
+            holdDice={() => holdDice(die.id)}
+            isHeld={die.isHeld}
+            key={die.id}
+            value={die.value}
+          />
+        ))}
+      </div>
+    );
+  };
 
-  /*
-    ---------- MAIN RETURN ----------
-  */
   // a few checks happen here. The confetti is thrown when the user wins the game, the title and description changes, and the button changes its text - all based on whether or not the game is finished (tenzies is true)
   return (
     <main className="main">
@@ -117,6 +119,7 @@ function App() {
         <h1>{tenzies ? '🎉 You win! 🎉' : 'Tenzies'}</h1>
         {/* remove line below after best time functionality is implemented properly */}
         <p>bestTime value is {bestTimeInSeconds}</p>
+        <p>bestRoll value is {bestRoll}</p>
         {tenzies ? (
           <div>
             <p>🥳 Congratulations! 🥳</p>
@@ -132,7 +135,7 @@ function App() {
           </p>
         )}
       </div>
-      <div className="dice-container">{diceElements}</div>
+      <DiceContainer />
       <div>
         <button onClick={rollDice} className="roll-button">
           {tenzies ? 'New Game' : 'Roll'}
