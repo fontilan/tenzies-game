@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
+
+import DiceContainer from './components/DiceContainer';
+import GameText from './components/GameText';
+import Header from './components/Header';
+
 import Confetti from 'react-confetti';
 import { nanoid } from 'nanoid';
-
-import Die from './Die';
 
 function App() {
   const [bestRoll, setBestRoll] = useState();
@@ -95,59 +98,20 @@ function App() {
     );
   }
 
-  // assign each object from the dice array (each die) to a Die component
-  function DiceContainer() {
-    return (
-      <div className="dice-container">
-        {dice.map((die) => (
-          <Die
-            holdDice={() => holdDice(die.id)}
-            isHeld={die.isHeld}
-            key={die.id}
-            value={die.value}
-          />
-        ))}
-      </div>
-    );
-  }
-  // dynamic text based on whether or not the game was won
-  function Header() {
-    return <h1>{tenzies ? '🎉 You win! 🎉' : 'Tenzies'}</h1>;
-  }
-
-  // text also dynamic based on whether or not the game was won
-  function GameText() {
-    return (
-      <>
-        {/* remove line below after best time functionality is implemented properly */}
-        <p>bestTime value is {bestTimeInSeconds}</p>
-        <p>bestRoll value is {bestRoll}</p>
-        {tenzies ? (
-          <div>
-            <p>🥳 Congratulations! 🥳</p>
-            <p>
-              It took you {gameTimeInSeconds} seconds and {numOfRolls} rolls to
-              win
-            </p>
-          </div>
-        ) : (
-          <p>
-            Roll until all dice are the same. Click each die to freeze it at its
-            current value between rolls.
-          </p>
-        )}
-      </>
-    );
-  }
-
   // the confetti is thrown when the user wins the game
   // the button changes its text based on whether or not the game is finished (tenzies is true)
   return (
     <main className="main">
       {tenzies && <Confetti />}
-      <Header />
-      <GameText />
-      <DiceContainer />
+      <Header tenzies={tenzies} />
+      <GameText
+        bestRoll={bestRoll}
+        bestTimeInSeconds={bestTimeInSeconds}
+        gameTimeInSeconds={gameTimeInSeconds}
+        numOfRolls={numOfRolls}
+        tenzies={tenzies}
+      />
+      <DiceContainer dice={dice} holdDice={holdDice} />
       <div>
         <button onClick={rollDice} className="roll-button">
           {tenzies ? 'New Game' : 'Roll'}
