@@ -12,6 +12,10 @@ function App() {
   const [startTimer, setStartTimer] = useState();
   const [tenzies, setTenzies] = useState(false);
 
+  // values converted into seconds and rounded off to a given precision - currently 2 digits after the decimal point
+  const bestTimeInSeconds = (bestTime / 1000).toFixed(2);
+  const gameTimeInSeconds = (gameTime / 1000).toFixed(2);
+
   // start the timer after the page loads and then when tenzies change - on the start of new game
   useEffect(() => {
     const startingTime = new Date();
@@ -22,7 +26,7 @@ function App() {
   function endTimer() {
     let endTimer = new Date();
     let timeDifference = endTimer.getTime() - startTimer.getTime();
-    setGameTime(Math.floor(timeDifference / 1000));
+    setGameTime(timeDifference);
   }
 
   // every time the gameTime value is changed (which happens when the game ends) check if the current gameTime value is smaller than the bestTime, and if yes then set the bestTime to be equal to that.
@@ -106,12 +110,13 @@ function App() {
       <div>
         <h1>{tenzies ? '🎉 You win! 🎉' : 'Tenzies'}</h1>
         {/* remove line below after best time functionality is implemented properly */}
-        <p>bestTime value is {bestTime}</p>
+        <p>bestTime value is {bestTimeInSeconds}</p>
         {tenzies ? (
           <div>
             <p>🥳 Congratulations! 🥳</p>
             <p>
-              It took you {gameTime} seconds and {numOfRolls} rolls to win
+              It took you {gameTimeInSeconds} seconds and {numOfRolls} rolls to
+              win
             </p>
           </div>
         ) : (
