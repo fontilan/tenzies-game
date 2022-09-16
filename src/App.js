@@ -96,7 +96,7 @@ function App() {
   }
 
   // assign each object from the dice array (each die) to a Die component
-  const DiceContainer = () => {
+  function DiceContainer() {
     return (
       <div className="dice-container">
         {dice.map((die) => (
@@ -109,7 +109,9 @@ function App() {
         ))}
       </div>
     );
-  };
+  }
+
+  // const
 
   // a few checks happen here. The confetti is thrown when the user wins the game, the title and description changes, and the button changes its text - all based on whether or not the game is finished (tenzies is true)
   return (
