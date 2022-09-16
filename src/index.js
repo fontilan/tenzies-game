@@ -16,4 +16,6 @@ root.render(
 // ✔ make it responsive
 // ✔ track the number of rolls
 // ✔ track the time it took to win
+// ✖ track the best time and lowest rolls
 // ✖ save best time to localStorage
+// ✖ show some kind of a message when beating your best score
