@@ -48,7 +48,10 @@ svg {
   justify-content: space-between;
 }
 .best-scores__score {
+  border-radius: 0.25em;
+  border: 1px solid #e0dee8;
   font-size: 1rem;
+  padding: 0.25em 0.5em;
 }
 
 /* dice container and dice */
