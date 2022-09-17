@@ -8,21 +8,29 @@ import Confetti from 'react-confetti';
 import { nanoid } from 'nanoid';
 
 function App() {
-  // get the value of best roll from local storage. If it's not there yet then set it to null
+  // get the values of best roll and best time from local storage. If it's not there yet then set it to null
   const [bestRoll, setBestRoll] = useState(
     localStorage.getItem('best-roll') || null,
   );
-  const [bestTime, setBestTime] = useState();
+  const [bestTime, setBestTime] = useState(
+    localStorage.getItem('best-time') || null,
+  );
+
   const [dice, setDice] = useState(allNewDice());
   const [gameTime, setGameTime] = useState();
   const [numOfRolls, setNumOfRolls] = useState(1);
   const [startTimer, setStartTimer] = useState(new Date());
   const [tenzies, setTenzies] = useState(false);
 
-  // save the bestRoll in local storage
+  // save bestRoll in local storage, update it every time its value changes
   useEffect(() => {
     localStorage.setItem('best-roll', bestRoll);
   }, [bestRoll]);
+
+  // save bestTime in local storage, update it every time its value changes
+  useEffect(() => {
+    localStorage.setItem('best-time', bestTime);
+  }, [bestTime]);
 
   // values converted into seconds and rounded off to a given precision - currently 2 digits after the decimal point
   const bestTimeInSeconds = (bestTime / 1000).toFixed(2);
@@ -74,7 +82,7 @@ function App() {
     let endTimer = new Date();
     let timeDifference = endTimer.getTime() - startTimer.getTime();
     setGameTime(timeDifference);
-    if (bestTime === undefined || bestTime > timeDifference) {
+    if (bestTime === null || bestTime > timeDifference) {
       setBestTime(timeDifference);
     }
     if (bestRoll === null || bestRoll > numOfRolls) {
