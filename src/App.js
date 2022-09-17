@@ -51,8 +51,7 @@ function App() {
     return {
       id: nanoid(),
       isHeld: false,
-      // update the line below to Math.random() * 6 + 1 after implementing whatever needs to be implemented
-      value: Math.floor(Math.random() * 3 + 1),
+      value: Math.floor(Math.random() * 6 + 1),
     };
   }
 
