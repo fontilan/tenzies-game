@@ -17,5 +17,5 @@ root.render(
 // ✔ track the number of rolls
 // ✔ track the time it took to win
 // ✔ track the best time and lowest rolls
-// ✖ save best time and roll to localStorage
+// ✔ save best time and roll to localStorage
 // ✖ show some kind of a message when beating your best score
