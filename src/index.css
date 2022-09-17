@@ -42,30 +42,13 @@ svg {
   border-radius: 0.25em;
 }
 
+/* best scores */
 .best-scores {
   display: flex;
   justify-content: space-between;
 }
 .best-scores__score {
   font-size: 1rem;
-}
-
-/* button */
-.roll-button {
-  background-color: #f8bd96;
-  border-radius: 0.25em;
-  border: none;
-  box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.12);
-  color: #2b283a;
-  cursor: pointer;
-  font-family: 'Karla', sans-serif;
-  font-size: clamp(1rem, 5vw, 1.75rem);
-  letter-spacing: -0.05em;
-  margin-top: 2em;
-  padding: 0.75em 2em;
-}
-.roll-button:active {
-  box-shadow: none;
 }
 
 /* dice container and dice */
@@ -86,6 +69,24 @@ svg {
   font-size: clamp(1.75rem, 10vw, 2.5rem);
   height: clamp(1.75em, 10vw, 2em);
   width: clamp(1.75em, 10vw, 2em);
+}
+
+/* button */
+.roll-button {
+  background-color: #f8bd96;
+  border-radius: 0.25em;
+  border: none;
+  box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.12);
+  color: #2b283a;
+  cursor: pointer;
+  font-family: 'Karla', sans-serif;
+  font-size: clamp(1rem, 5vw, 1.75rem);
+  letter-spacing: -0.05em;
+  margin-top: 2em;
+  padding: 0.75em 2em;
+}
+.roll-button:active {
+  box-shadow: none;
 }
 
 /* mobile layout - dice stacked in two vertical rows of 5 dice, main element takes the whole page */
