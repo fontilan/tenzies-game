@@ -16,7 +16,12 @@ function GameText({
       ) : (
         <></>
       )}
-      {tenzies ? (
+      {!tenzies ? (
+        <p>
+          Roll until all dice are the same. Click each die to freeze it at its
+          current value between rolls.
+        </p>
+      ) : (
         <div>
           <p>🥳 Congratulations! 🥳</p>
           <p>
@@ -24,11 +29,6 @@ function GameText({
             win
           </p>
         </div>
-      ) : (
-        <p>
-          Roll until all dice are the same. Click each die to freeze it at its
-          current value between rolls.
-        </p>
       )}
     </>
   );
