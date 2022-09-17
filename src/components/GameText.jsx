@@ -8,8 +8,14 @@ function GameText({
 }) {
   return (
     <>
-      <p>bestTime value is {bestTimeInSeconds}</p>
-      <p>bestRoll value is {bestRoll}</p>
+      {bestRoll !== null && bestTimeInSeconds !== null ? (
+        <div className="best-scores">
+          <p className="best-scores__score">Best time: {bestTimeInSeconds}s</p>
+          <p className="best-scores__score">Lowest # of rolls: {bestRoll}</p>
+        </div>
+      ) : (
+        <></>
+      )}
       {tenzies ? (
         <div>
           <p>🥳 Congratulations! 🥳</p>
