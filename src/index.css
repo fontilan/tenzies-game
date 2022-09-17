@@ -42,6 +42,14 @@ svg {
   border-radius: 0.25em;
 }
 
+.best-scores {
+  display: flex;
+  justify-content: space-between;
+}
+.best-scores__score {
+  font-size: 1rem;
+}
+
 /* button */
 .roll-button {
   background-color: #f8bd96;
