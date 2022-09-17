@@ -8,13 +8,21 @@ import Confetti from 'react-confetti';
 import { nanoid } from 'nanoid';
 
 function App() {
-  const [bestRoll, setBestRoll] = useState();
+  // get the value of best roll from local storage. If it's not there yet then set it to null
+  const [bestRoll, setBestRoll] = useState(
+    localStorage.getItem('best-roll') || null,
+  );
   const [bestTime, setBestTime] = useState();
   const [dice, setDice] = useState(allNewDice());
   const [gameTime, setGameTime] = useState();
   const [numOfRolls, setNumOfRolls] = useState(1);
   const [startTimer, setStartTimer] = useState(new Date());
   const [tenzies, setTenzies] = useState(false);
+
+  // save the bestRoll in local storage
+  useEffect(() => {
+    localStorage.setItem('best-roll', bestRoll);
+  }, [bestRoll]);
 
   // values converted into seconds and rounded off to a given precision - currently 2 digits after the decimal point
   const bestTimeInSeconds = (bestTime / 1000).toFixed(2);
@@ -69,7 +77,7 @@ function App() {
     if (bestTime === undefined || bestTime > timeDifference) {
       setBestTime(timeDifference);
     }
-    if (bestRoll === undefined || bestRoll > numOfRolls) {
+    if (bestRoll === null || bestRoll > numOfRolls) {
       setBestRoll(numOfRolls);
     }
   }
