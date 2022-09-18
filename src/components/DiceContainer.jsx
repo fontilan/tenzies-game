@@ -1,3 +1,5 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import Die from './Die';
 
 // assign each object from the dice array (each die) to a Die component
@@ -15,5 +17,10 @@ function DiceContainer({ dice, holdDice }) {
     </div>
   );
 }
+
+DiceContainer.propTypes = {
+  dice: PropTypes.objectOf.isRequired,
+  holdDice: PropTypes.func.isRequired,
+};
 
 export default DiceContainer;
