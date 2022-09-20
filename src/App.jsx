@@ -1,11 +1,15 @@
+/* eslint-disable function-paren-newline */
+/* eslint-disable no-confusing-arrow */
+/* eslint-disable implicit-arrow-linebreak */
+/* eslint-disable no-use-before-define */
+/* eslint-disable react/jsx-no-bind */
 import React, { useEffect, useState } from 'react';
-
-import DiceContainer from './components/DiceContainer';
-import GameText from './components/GameText';
-import Header from './components/Header';
 
 import Confetti from 'react-confetti';
 import { nanoid } from 'nanoid';
+import DiceContainer from './components/DiceContainer';
+import GameText from './components/GameText';
+import Header from './components/Header';
 
 function App() {
   // get the values of best roll and best time from local storage. If it's not there yet then set it to null
@@ -57,8 +61,8 @@ function App() {
 
   // generate 10 new dice
   function allNewDice() {
-    let newDice = [];
-    for (let i = 0; i < 10; i++) {
+    const newDice = [];
+    for (let i = 0; i < 10; i += 1) {
       newDice.push(generateDice());
     }
     return newDice;
@@ -78,8 +82,8 @@ function App() {
   // do the same with the number of rolls
   function endGame() {
     setTenzies(true);
-    let endTimer = new Date();
-    let timeDifference = endTimer.getTime() - startTimer.getTime();
+    const endTimer = new Date();
+    const timeDifference = endTimer.getTime() - startTimer.getTime();
     setGameTime(timeDifference);
     if (bestTime === null || bestTime > timeDifference) {
       setBestTime(timeDifference);
@@ -94,9 +98,7 @@ function App() {
   function rollDice() {
     if (!tenzies) {
       setDice((oldDice) =>
-        oldDice.map((die) => {
-          return die.isHeld ? die : generateDice();
-        }),
+        oldDice.map((die) => (die.isHeld ? die : generateDice())),
       );
       setNumOfRolls((prevNum) => prevNum + 1);
     } else {
@@ -107,9 +109,9 @@ function App() {
   // hold the dice - map through the current dice array (oldDice), find the one to hold by the id that is passed when triggering this funcion, set its isHeld prop accordingly, from true to false and vice versa
   function holdDice(id) {
     setDice((oldDice) =>
-      oldDice.map((die) => {
-        return die.id === id ? { ...die, isHeld: !die.isHeld } : die;
-      }),
+      oldDice.map((die) =>
+        die.id === id ? { ...die, isHeld: !die.isHeld } : die,
+      ),
     );
   }
 
@@ -128,7 +130,7 @@ function App() {
       />
       <DiceContainer dice={dice} holdDice={holdDice} />
       <div>
-        <button onClick={rollDice} className="roll-button">
+        <button type="button" onClick={rollDice} className="roll-button">
           {tenzies ? 'New Game' : 'Roll'}
         </button>
       </div>

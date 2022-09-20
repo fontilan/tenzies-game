@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import Die from './Die';
 
 // assign each object from the dice array (each die) to a Die component

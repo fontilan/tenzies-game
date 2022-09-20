@@ -1,3 +1,6 @@
+/* eslint-disable react/jsx-no-useless-fragment */
+/* eslint-disable react/jsx-one-expression-per-line */
+/* eslint-disable react/prop-types */
 // dynamic game text, consisting of two main parts
 // display the best scores section only when bestRolls and bestTimeInSeconds have proper values, i.e after playing at least one game
 // if the game is not yet finished - display instructions. If it is finished - display congratulations and scores
