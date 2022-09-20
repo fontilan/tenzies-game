@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable react/jsx-one-expression-per-line */
 import PropTypes from 'prop-types';
 // dynamic game text, consisting of two main parts
@@ -13,13 +12,11 @@ function GameText({
 }) {
   return (
     <>
-      {bestRoll !== null && bestTimeInSeconds !== null ? (
+      {bestRoll !== null && bestTimeInSeconds !== null && (
         <div className="best-scores">
           <p className="best-scores__score">Best time: {bestTimeInSeconds}s</p>
           <p className="best-scores__score">Lowest # of rolls: {bestRoll}</p>
         </div>
-      ) : (
-        <></>
       )}
       {!tenzies ? (
         <p>
