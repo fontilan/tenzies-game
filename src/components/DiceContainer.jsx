@@ -18,7 +18,7 @@ function DiceContainer({ dice, holdDice }) {
 }
 
 DiceContainer.propTypes = {
-  dice: PropTypes.objectOf.isRequired,
+  dice: PropTypes.arrayOf(PropTypes.objectOf).isRequired,
   holdDice: PropTypes.func.isRequired,
 };
 
