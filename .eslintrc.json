@@ -3,7 +3,12 @@
     "browser": true,
     "es2021": true
   },
-  "extends": ["plugin:react/recommended", "plugin:react/jsx-runtime", "airbnb"],
+  "extends": [
+    "plugin:react/recommended",
+    "plugin:react/jsx-runtime",
+    "airbnb",
+    "prettier"
+  ],
   "overrides": [],
   "parserOptions": {
     "ecmaVersion": "latest",
@@ -11,8 +16,6 @@
   },
   "plugins": ["react", "prettier"],
   "rules": {
-    "react/jsx-one-expression-per-line": 0,
-    "react/react-in-jsx-scope": 0,
-    "max-len": ["error", { "ignoreComments": true, "ignoreStrings": true }]
+    "react/react-in-jsx-scope": 0
   }
 }
