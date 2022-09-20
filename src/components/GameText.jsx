@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-one-expression-per-line */
 import PropTypes from 'prop-types';
 // dynamic game text, consisting of two main parts
 // display the best scores section only when bestRolls and bestTimeInSeconds have proper values, i.e after playing at least one game
