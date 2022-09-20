@@ -15,7 +15,6 @@ function App() {
   const [bestTime, setBestTime] = useState(
     localStorage.getItem('best-time') || null,
   );
-
   const [dice, setDice] = useState(allNewDice());
   const [gameTime, setGameTime] = useState();
   const [numOfRolls, setNumOfRolls] = useState(1);
