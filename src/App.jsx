@@ -1,9 +1,8 @@
 /* eslint-disable react/jsx-no-bind */
-/* eslint-disable no-use-before-define */
 import React, { useEffect, useState } from 'react';
-
 import Confetti from 'react-confetti';
 import { nanoid } from 'nanoid';
+
 import DiceContainer from './components/DiceContainer';
 import GameText from './components/GameText';
 import Header from './components/Header';
