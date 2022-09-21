@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from 'react';
+import Confetti from 'react-confetti';
+import { nanoid } from 'nanoid';
 
 import DiceContainer from './components/DiceContainer';
 import GameText from './components/GameText';
 import Header from './components/Header';
 
-import Confetti from 'react-confetti';
-import { nanoid } from 'nanoid';
-
 function App() {
   // get the values of best roll and best time from local storage. If it's not there yet then set it to null
   const [bestRoll, setBestRoll] = useState(
-    localStorage.getItem('best-roll') || null,
+    parseFloat(localStorage.getItem('best-roll')) || null,
   );
   const [bestTime, setBestTime] = useState(
-    localStorage.getItem('best-time') || null,
+    parseFloat(localStorage.getItem('best-time')) || null,
   );
-
   const [dice, setDice] = useState(allNewDice());
   const [gameTime, setGameTime] = useState();
   const [numOfRolls, setNumOfRolls] = useState(1);
@@ -33,8 +31,9 @@ function App() {
   }, [bestTime]);
 
   // values converted into seconds and rounded off to a given precision - currently 2 digits after the decimal point
-  const bestTimeInSeconds = (bestTime / 1000).toFixed(2);
-  const gameTimeInSeconds = (gameTime / 1000).toFixed(2);
+  // we are using parseFloat() because .toFixed() returns a string
+  const bestTimeInSeconds = parseFloat((bestTime / 1000).toFixed(2));
+  const gameTimeInSeconds = parseFloat((gameTime / 1000).toFixed(2));
 
   // end game (tenzies) check. The game ends when all dice are held and all of them are the same value. This check happens every time the dice object changes
   useEffect(() => {
@@ -57,8 +56,8 @@ function App() {
 
   // generate 10 new dice
   function allNewDice() {
-    let newDice = [];
-    for (let i = 0; i < 10; i++) {
+    const newDice = [];
+    for (let i = 0; i < 10; i += 1) {
       newDice.push(generateDice());
     }
     return newDice;
@@ -78,8 +77,8 @@ function App() {
   // do the same with the number of rolls
   function endGame() {
     setTenzies(true);
-    let endTimer = new Date();
-    let timeDifference = endTimer.getTime() - startTimer.getTime();
+    const endTimer = new Date();
+    const timeDifference = endTimer.getTime() - startTimer.getTime();
     setGameTime(timeDifference);
     if (bestTime === null || bestTime > timeDifference) {
       setBestTime(timeDifference);
@@ -94,23 +93,12 @@ function App() {
   function rollDice() {
     if (!tenzies) {
       setDice((oldDice) =>
-        oldDice.map((die) => {
-          return die.isHeld ? die : generateDice();
-        }),
+        oldDice.map((die) => (die.isHeld ? die : generateDice())),
       );
       setNumOfRolls((prevNum) => prevNum + 1);
     } else {
       startNewGame();
     }
-  }
-
-  // hold the dice - map through the current dice array (oldDice), find the one to hold by the id that is passed when triggering this funcion, set its isHeld prop accordingly, from true to false and vice versa
-  function holdDice(id) {
-    setDice((oldDice) =>
-      oldDice.map((die) => {
-        return die.id === id ? { ...die, isHeld: !die.isHeld } : die;
-      }),
-    );
   }
 
   // the confetti is thrown when the user wins the game
@@ -126,9 +114,9 @@ function App() {
         numOfRolls={numOfRolls}
         tenzies={tenzies}
       />
-      <DiceContainer dice={dice} holdDice={holdDice} />
+      <DiceContainer dice={dice} setDice={setDice} />
       <div>
-        <button onClick={rollDice} className="roll-button">
+        <button type="button" onClick={rollDice} className="roll-button">
           {tenzies ? 'New Game' : 'Roll'}
         </button>
       </div>
