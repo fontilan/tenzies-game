@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-bind */
 import React, { useEffect, useState } from 'react';
 import Confetti from 'react-confetti';
 import { nanoid } from 'nanoid';
@@ -10,10 +9,10 @@ import Header from './components/Header';
 function App() {
   // get the values of best roll and best time from local storage. If it's not there yet then set it to null
   const [bestRoll, setBestRoll] = useState(
-    localStorage.getItem('best-roll') || null,
+    parseFloat(localStorage.getItem('best-roll')) || null,
   );
   const [bestTime, setBestTime] = useState(
-    localStorage.getItem('best-time') || null,
+    parseFloat(localStorage.getItem('best-time')) || null,
   );
   const [dice, setDice] = useState(allNewDice());
   const [gameTime, setGameTime] = useState();
@@ -32,8 +31,9 @@ function App() {
   }, [bestTime]);
 
   // values converted into seconds and rounded off to a given precision - currently 2 digits after the decimal point
-  const bestTimeInSeconds = (bestTime / 1000).toFixed(2);
-  const gameTimeInSeconds = (gameTime / 1000).toFixed(2);
+  // we are using parseFloat() because .toFixed() returns a string
+  const bestTimeInSeconds = parseFloat((bestTime / 1000).toFixed(2));
+  const gameTimeInSeconds = parseFloat((gameTime / 1000).toFixed(2));
 
   // end game (tenzies) check. The game ends when all dice are held and all of them are the same value. This check happens every time the dice object changes
   useEffect(() => {
@@ -101,15 +101,6 @@ function App() {
     }
   }
 
-  // hold the dice - map through the current dice array (oldDice), find the one to hold by the id that is passed when triggering this funcion, set its isHeld prop accordingly, from true to false and vice versa
-  function holdDice(id) {
-    setDice((oldDice) =>
-      oldDice.map((die) =>
-        die.id === id ? { ...die, isHeld: !die.isHeld } : die,
-      ),
-    );
-  }
-
   // the confetti is thrown when the user wins the game
   // the button changes its text based on whether or not the game is finished (tenzies is true)
   return (
@@ -123,7 +114,7 @@ function App() {
         numOfRolls={numOfRolls}
         tenzies={tenzies}
       />
-      <DiceContainer dice={dice} holdDice={holdDice} />
+      <DiceContainer dice={dice} setDice={setDice} />
       <div>
         <button type="button" onClick={rollDice} className="roll-button">
           {tenzies ? 'New Game' : 'Roll'}
