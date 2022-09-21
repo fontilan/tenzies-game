@@ -36,9 +36,9 @@ function GameText({
 }
 
 GameText.propTypes = {
-  bestRoll: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  bestTimeInSeconds: PropTypes.string.isRequired,
-  gameTimeInSeconds: PropTypes.string.isRequired,
+  bestRoll: PropTypes.number,
+  bestTimeInSeconds: PropTypes.number.isRequired,
+  gameTimeInSeconds: PropTypes.number.isRequired,
   numOfRolls: PropTypes.number.isRequired,
   tenzies: PropTypes.bool.isRequired,
 };
