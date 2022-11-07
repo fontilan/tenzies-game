@@ -13,5 +13,6 @@ I have also implemented a few additional features:
 - there is also a counter showing how many rolls it took you to win
 - the app keeps track of best times and lowest # of rolls
 - those best scores are saved to local storage, so they persist when the page is refreshed
+- the code has been refactored in accordance with the ~~Holy Scriptures~~ Airbnb JavaScript Style Guide
 
 https://fontilan.github.io/tenzies-game/
