@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import Die from './Die';
 
 function DiceContainer({ dice, setDice }) {
-  // hold the dice - map through the current dice array (oldDice), find the one to hold by the id that is passed when triggering this funcion, set its isHeld prop accordingly, from true to false and vice versa
+  // hold the dice - map through the current dice array (oldDice), find the one to hold by the id that is passed when triggering this function, set its isHeld prop accordingly, from true to false and vice versa
   function holdDice(id) {
     setDice((oldDice) =>
       oldDice.map((die) =>
