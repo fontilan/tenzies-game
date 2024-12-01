@@ -43,7 +43,7 @@
   },
   "homepage": "https://fontilan.github.io/tenzies-game",
   "devDependencies": {
-    "eslint": "^9.1.1",
+    "eslint": "^9.16.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-node": "^4.1.0",
     "eslint-config-prettier": "^9.1.0",
